@@ -74,7 +74,12 @@
 						물론 react를 처음 배우면서 작업을하여서 많이 부족하지만 저에게는 좋은 경험이 된 프로젝트였습니다.<br>
 						개발 기간 : 3개월<br><br> 												
 						<a style="font-size: large; color: blue;" href="http://3.132.247.253:3000/" target="_blank">(Click시 웹사이트로 이동) 접속불가시 서버가동x</a><br>
-						<span style="color: blue;">게스트용 로그인 정보 : guest@naver.com / @test1234</span><br><br><br>					    
+						<span style="color: blue;">게스트용 로그인 정보 : guest@naver.com / @test1234</span><br><br><br>	
+						(일반 로그인)<br>
+						로그인화면에서 입력된 PW를 암호화해서 DB에 암호화된 PW와 비교하여 로그인처리<br><br>	
+						(카카오 로그인)<br>
+						카카오 최초 연동시 카카오 고유IDNUM에 정보와 카카오 회원정보를 DB에 저장 <br>
+						/ 연동 후 로그인시 DB에 고유값과 비교하여 로그인처리<br><br> 			    
 						<img class="center"  src="img/React/Login.PNG" ><br><br>						
 						<img class="center"  src="img/React/Register.PNG" ><br><br>						
 						<img class="center"  src="img/React/Pwchange.PNG" >
@@ -85,10 +90,21 @@
 						<img class="center"  src="img/React/Main1.PNG" ><br><br>
 						코딩테스트일지<br><br>
 						<img class="center" src="img/React/Main2.PNG" ><br><br>
-						일반 로그인시 내정보 옵션(쿠키암호화 정보를 DB에 저장 정보를 불러올시 복호화 작업)<br><br>
+						(일반 로그인시 내정보 옵션)<br>
+						로그인된 정보는 암호화된 회원 쿠키정보를 복호화하여 가져와서 사용<br>
+						로그인 타이머/ 연장버튼 기능은 페이지 새로고침시 시간(쿠키) 초기화, 새로고침이 없는 페이지들은 타이머 유지<br>
+						타이머가 0이되면 자동 로그아웃<br>
+						정보수정/탈퇴 회원정보 확인 후 수정 및 탈퇴<br>
 						<img style="object-fit: none;" width="500px" height="200px" src="img/React/NormalOption.PNG" ><br><br>
-						카카오 로그인시 내정보 옵션(카카오 최초 연동시 카카오 고유IDNUM에 정보와 카카오 회원정보를 DB에 저장)<br><br>
+						<img class="center" src="img/React/Usermodify1.PNG" ><br><br>
+						<img class="center" src="img/React/Usermodify2.PNG" ><br><br>
+						(카카오 로그인시 내정보 옵션)<br>
+						카카오 로그아웃시 이 서비스만 로그아웃,카카오계정과 함께 로그아웃 선택 / 카카오 연동해제(회원탈퇴)<br><br>
 						<img style="object-fit: none;" width="500px" height="200px" src="img/React/KakaoOption.PNG" ><br><br>
+						<img style="object-fit: none;" width="500px" height="600px" src="img/React/KakaoLogout.PNG" ><br><br>
+						글쓰기(에디터 이미지 업로드, 첨부파일 추가)<br><br>
+						<img class="center" src="img/React/Writer.PNG" >
+						<img class="center" src="img/React/Writer2.PNG" ><br><br>		
 						게시판 검색<br><br>
 						<img class="center" src="img/React/Select.PNG" ><br><br>
 						내가 작성한 게시판 글<br><br>
@@ -98,12 +114,7 @@
 						<img class="center" src="img/React/replymodify.PNG" ><br><br>
 						다른 사용자가 작성한 게시판 글(첨부파일 클릭시 파일 다운로드)<br><br>
 						<img class="center" src="img/React/Sub3.PNG" ><br><br>
-						글쓰기(에디터 이미지 업로드, 첨부파일 추가)<br><br>
-						<img class="center" src="img/React/Writer.PNG" ><br><br>
-						정보수정/탈퇴<br><br>
-						<img class="center" src="img/React/Usermodify1.PNG" ><br><br>
-						<img class="center" src="img/React/Usermodify2.PNG" ><br><br>
-
+			
 					</p>
 				</div> <!-- .cd-project-info -->
 			</li>
