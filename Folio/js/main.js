@@ -1,6 +1,6 @@
-jQuery(document).ready(function($){
+document.addEventListener("DOMContentLoaded", function(){
 	//cache DOM elements
-	var projectsContainer = $('.cd-projects-container'),
+	let projectsContainer = $('.cd-projects-container'),
 		projectsPreviewWrapper = projectsContainer.find('.cd-projects-previews'),
 		projectPreviews = projectsPreviewWrapper.children('li'),
 		projects = projectsContainer.find('.cd-projects'),
@@ -9,7 +9,7 @@ jQuery(document).ready(function($){
 		//if browser doesn't support CSS transitions...
 		transitionsNotSupported = ( $('.no-csstransitions').length > 0);
 
-	var animating = false,
+	let animating = false,
 		//will be used to extract random numbers for projects slide up/slide down effect
 		numRandoms = projects.find('li').length, 
 		uniqueRandoms = [];
@@ -73,7 +73,7 @@ jQuery(document).ready(function($){
 	}
 
 	function openProject(projectPreview) {
-		var projectIndex = projectPreview.index();
+		let projectIndex = projectPreview.index();
 		projects.children('li').eq(projectIndex).add(projectPreview).addClass('selected');
 		
 		if( transitionsNotSupported ) {
@@ -103,7 +103,7 @@ jQuery(document).ready(function($){
 		if(index == 0 ) createArrayRandom();
 		if( projectIndex != -1 && index == 0 ) index = 1;
 
-		var randomProjectIndex = makeUniqueRandom();
+		let randomProjectIndex = makeUniqueRandom();
 		if( randomProjectIndex == projectIndex ) randomProjectIndex = makeUniqueRandom();
 		
 		if( index < numRandoms - 1 ) {
@@ -129,8 +129,8 @@ jQuery(document).ready(function($){
 
 	//http://stackoverflow.com/questions/19351759/javascript-random-number-out-of-5-no-repeat-until-all-have-been-used
 	function makeUniqueRandom() {
-	    var index = Math.floor(Math.random() * uniqueRandoms.length);
-	    var val = uniqueRandoms[index];
+	    let index = Math.floor(Math.random() * uniqueRandoms.length);
+	    let val = uniqueRandoms[index];
 	    // now remove that value from the array
 	    uniqueRandoms.splice(index, 1);
 	    return val;
@@ -139,38 +139,33 @@ jQuery(document).ready(function($){
 	function createArrayRandom() {
 		//reset array
 		uniqueRandoms.length = 0;
-		for (var i = 0; i < numRandoms; i++) {
+		for (let i = 0; i < numRandoms; i++) {
             uniqueRandoms.push(i);
         }
 	}
 });
 
- /*
- * BG Loaded
- * Copyright (c) 2014 Jonathan Catmull
- * Licensed under the MIT license.
- */
  (function($){
  	$.fn.bgLoaded = function(custom) {
-	 	var self = this;
+	 	let self = this;
 
 		// Default plugin settings
-		var defaults = {
+		let defaults = {
 			afterLoaded : function(){
 				this.addClass('bg-loaded');
 			}
 		};
 
 		// Merge default and user settings
-		var settings = $.extend({}, defaults, custom);
+		let settings = $.extend({}, defaults, custom);
 
 		// Loop through element
 		self.each(function(){
-			var $this = $(this),
+			let $this = $(this),
 				bgImgs = $this.css('background-image').split(', ');
 			$this.data('loaded-count',0);
 			$.each( bgImgs, function(key, value){
-				var img = value.replace(/^url\(["']?/, '').replace(/["']?\)$/, '');
+				let img = value.replace(/^url\(["']?/, '').replace(/["']?\)$/, '');
 				$('<img/>').attr('src', img).load(function() {
 					$(this).remove(); // prevent memory leaks
 					$this.data('loaded-count',$this.data('loaded-count')+1);
