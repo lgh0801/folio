@@ -94,16 +94,18 @@
 						쿠키에 jwt를 사용하여 암호화된 userid,username 정보를 저장<br><br>						
 						<img class="center"  src="img/React/Login.PNG" ><br><br>						
 						회원가입 시 PW는 bcrypt를 사용하여 해시 함수로 암호화하여 DB에 저장(해시는 암호화만 가능)<br><br>	
-						<img class="center"  src="img/React/Register.PNG" ><br><br>						
-						메일 템플릿 파일을 불러오기 위해 fs패키지와 메일 발송을 위해 nodemailer 패키지 사용<br><br>						
+						<img class="center"  src="img/React/Register.PNG" ><br><br>																	
 						<img class="center"  src="img/React/Pwchange.PNG" >
+						메일 템플릿 파일을 불러오기 위해 node.js fs모듈과 메일 발송을 위해 nodemailer모듈 사용<br><br>	
 						<img class="center"  src="img/React/Pwchange2.PNG" ><br><br>
 						(카카오 로그인)<br>
 						REST API 키 사용<br>						
 						카카오 최초 연동시 카카오 고유IDNUM에 정보와 카카오 회원정보를 DB에 저장 <br>
 						/ 연동 후 로그인시 DB에 고유값과 비교하여 로그인처리<br><br> 	
 						<img class="center"  src="img/React/KakaoLogin.PNG" ><br><br>
-						관리자/사용자 권한 부여 ex) 관리자는 모든 회원에 글과 댓글을 삭제할 수 있다.<br>
+						게시판<br>
+						관리자/사용자 권한 부여 ex) 관리자는 모든 회원에 글과 댓글을 삭제 가능<br>
+						페이징 기능은 react-paginate를 사용하여 구현<br><br>
 						자유게시판<br><br>
 						<img class="center"  src="img/React/Main1.PNG" ><br><br>
 						코딩테스트일지<br><br>
@@ -122,16 +124,20 @@
 						로그인된 정보는 DB에 저장된 카카오 로그인정보를 가져와서 사용<br>
 						카카오 로그아웃시 이 서비스만 로그아웃,카카오계정과 함께 로그아웃 선택 / 카카오 연동해제(회원탈퇴)<br><br>
 						<img style="object-fit: none;" width="500px" height="200px" src="img/React/KakaoOption.PNG" ><br><br>
-						<img style="object-fit: none;" width="500px" height="600px" src="img/React/KakaoLogout.PNG" ><br><br>
-						글쓰기(에디터 이미지 업로드, 첨부파일 추가)<br><br>
+						<img style="object-fit: none;" width="500px" height="600px" src="img/React/KakaoLogout.PNG" ><br><br>																		
+						글쓰기(에디터 이미지 업로드, 첨부파일 추가)<br>						
+						에디터 기능은 react-quill를 사용하여 구현<br>						
+						에디터 이미지 업로드 부분은 직접 함수를 만들어서 처리<br>
+						업로드를 위해 node.js multer모듈 사용<br><br>					
 						<img class="center" src="img/React/Writer.PNG" >
 						<img class="center" src="img/React/Writer2.PNG" ><br><br>		
 						내가 작성한 게시판 글<br><br>
 						<img class="center" src="img/React/Sub1.PNG" >
 						<img class="center" src="img/React/Sub2.PNG" ><br><br>
 						댓글 수정<br><br>
-						<img class="center" src="img/React/replymodify.PNG" ><br><br>
-						다른 사용자가 작성한 게시판 글(첨부파일 클릭시 파일 다운로드)<br><br>
+						<img class="center" src="img/React/replymodify.PNG" ><br><br>						
+						다른 사용자가 작성한 게시판 글(첨부파일 클릭시 파일 다운로드)<br>
+						다운로드를 위해 node.js fs,path,mime 모듈 사용<br><br>
 						<img class="center" src="img/React/Sub3.PNG" ><br><br>
 						404페이지<br><br>
 						<img class="center" src="img/React/404.PNG" ><br><br>
