@@ -92,8 +92,9 @@
 						<b style="font-size: large;">전부는 아니지만 몇 개의 기능구현은 블로그에 기록해놨습니다.</b><br><br><br>						 											
 						(일반 로그인)<br>
 						로그인 화면에서 입력된 정보를 DB에 저장된 정보와 비교하여 로그인 처리<br>			    						
-						(DB에 암호화된 PW는 bcrypt를 사용하여 비교 처리)<br>
-						쿠키에 jwt를 사용하여 암호화된 userid,username 정보를 저장<br><br>						
+						(DB에 암호화된 PW는 bcrypt를 사용하여 복호화 처리해서 비교)<br>	
+						서버에서 jwt를 사용하여 암호화된 ID, NAME과 기존에 암호화 시킨 PW를 쿠키에 저장<br>
+						오류가 발생하지 않으면 다음 화면으로 이동<br><br>																		
 						<img class="center"  src="img/React/Login.PNG" ><br><br>						
 						회원가입 시 PW는 bcrypt를 사용하여 해시 함수로 암호화하여 DB에 저장(해시는 암호화만 가능)<br><br>	
 						<img class="center"  src="img/React/Register.PNG" ><br><br>																	
