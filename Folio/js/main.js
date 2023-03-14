@@ -1,180 +1,179 @@
 document.addEventListener("DOMContentLoaded", function(){
-	//cache DOM elements
-	let projectsContainer = $('.cd-projects-container'),
-		projectsPreviewWrapper = projectsContainer.find('.cd-projects-previews'),
-		projectPreviews = projectsPreviewWrapper.children('li'),
-		projects = projectsContainer.find('.cd-projects'),
-		navigationTrigger = $('.cd-nav-trigger'),
-		navigation = $('.cd-primary-nav'),
-		//if browser doesn't support CSS transitions...
-		transitionsNotSupported = ( $('.no-csstransitions').length > 0);
+	const projectsContainer = document.querySelector('.cd-projects-container'),
+    projectsPreviewWrapper = projectsContainer.querySelector('.cd-projects-previews'),
+    projectPreviews = projectsPreviewWrapper.querySelectorAll('li'),
+    projects = projectsContainer.querySelector('.cd-projects'),
+    navigationTrigger = document.querySelector('.cd-nav-trigger'),
+    navigation = document.querySelector('.cd-primary-nav'),
+    transitionsNotSupported = (document.querySelectorAll('.no-csstransitions').length > 0);
 
+	// 애니메이션 변수 선언
 	let animating = false,
-		//will be used to extract random numbers for projects slide up/slide down effect
-		numRandoms = projects.find('li').length, 
+		numRandoms = projects.querySelectorAll('li').length,
 		uniqueRandoms = [];
 
-	//open project
-	projectsPreviewWrapper.on('click', 'a', function(event){
+	// 프로젝트 미리보기 래퍼 클릭 이벤트 리스너	
+	projectsPreviewWrapper.addEventListener('click', function(event) {
 		event.preventDefault();
-		if( animating == false ) {
+		if (animating == false) {
 			animating = true;
-			navigationTrigger.add(projectsContainer).addClass('project-open');
-			openProject($(this).parent('li'));
+			navigationTrigger.classList.add('project-open');
+			projectsContainer.classList.add('project-open');
+			openProject(event.target.closest('li'));
 		}
 	});
 
-	navigationTrigger.on('click', function(event){
+	// 내비게이션 트리거 클릭 이벤트 리스너
+	navigationTrigger.addEventListener('click', function(event) {
 		event.preventDefault();
-		
-		if( animating == false ) {
+		if (animating == false) {
 			animating = true;
-			if( navigationTrigger.hasClass('project-open') ) {
-				//close visible project
-				navigationTrigger.add(projectsContainer).removeClass('project-open');
+			if (navigationTrigger.classList.contains('project-open')) {
+				navigationTrigger.classList.remove('project-open');
+				projectsContainer.classList.remove('project-open');
 				closeProject();
-			} else if( navigationTrigger.hasClass('nav-visible') ) {
-				//close main navigation
-				navigationTrigger.removeClass('nav-visible');
-				navigation.removeClass('nav-clickable nav-visible');
-				if(transitionsNotSupported) projectPreviews.removeClass('slide-out');
-				else slideToggleProjects(projectsPreviewWrapper.children('li'), -1, 0, false);
+			} else if (navigationTrigger.classList.contains('nav-visible')) {
+				navigationTrigger.classList.remove('nav-visible');
+				navigation.classList.remove('nav-clickable', 'nav-visible');
+				if (transitionsNotSupported) projectPreviews.forEach(preview => preview.classList.remove('slide-out'));
+				else slideToggleProjects(projectsPreviewWrapper.querySelectorAll('li'), -1, 0, false);
 			} else {
-				//open main navigation
-				navigationTrigger.addClass('nav-visible');
-				navigation.addClass('nav-visible');
-				if(transitionsNotSupported) projectPreviews.addClass('slide-out');
-				else slideToggleProjects(projectsPreviewWrapper.children('li'), -1, 0, true);
+				navigationTrigger.classList.add('nav-visible');
+				navigation.classList.add('nav-visible');
+				if (transitionsNotSupported) projectPreviews.forEach(preview => preview.classList.add('slide-out'));
+				else slideToggleProjects(projectsPreviewWrapper.querySelectorAll('li'), -1, 0, true);
 			}
-		}	
-
-		if(transitionsNotSupported) animating = false;
+		}
+		if (transitionsNotSupported) animating = false;
 	});
 
-	//scroll down to project info
-	projectsContainer.on('click', '.scroll', function(){
-		projectsContainer.animate({'scrollTop':$(window).height()}, 500); 
-	});
+	// 로드 후 함수
+	function afterLoaded() {
+		showPreview(projectPreviews[0]);
+	}
 
-	//check if background-images have been loaded and show project previews
-	projectPreviews.children('a').bgLoaded({
-	  	afterLoaded : function(){
-	   		showPreview(projectPreviews.eq(0));
-	  	}
+	// 프로젝트 컨테이너 클릭 이벤트 리스너
+	projectsContainer.addEventListener('click', function(event) {
+		// 스크롤 클래스가 있는 경우
+		if (event.target.classList.contains('scroll')) {
+			// 프로젝트 컨테이너를 스무스하게 스크롤
+			projectsContainer.scrollTo({
+				top: window.innerHeight,
+				behavior: 'smooth'
+			});
+		}
 	});
-
+	
+	// 프로젝트 미리보기 표시 함수
 	function showPreview(projectPreview) {
-		if(projectPreview.length > 0 ) {
-			setTimeout(function(){
-				projectPreview.addClass('bg-loaded');
-				showPreview(projectPreview.next());
+		if (projectPreview) {
+			setTimeout(function() {
+				projectPreview.classList.add('bg-loaded');
+				showPreview(projectPreview.nextElementSibling);
 			}, 150);
 		}
 	}
-
+	
+	// 프로젝트 열기 함수
 	function openProject(projectPreview) {
-		let projectIndex = projectPreview.index();
-		projects.children('li').eq(projectIndex).add(projectPreview).addClass('selected');
-		
-		if( transitionsNotSupported ) {
-			projectPreviews.addClass('slide-out').removeClass('selected');
-			projects.children('li').eq(projectIndex).addClass('content-visible');
+		const projectIndex = Array.prototype.indexOf.call(projectPreviews, projectPreview);
+		projects.querySelectorAll('li')[projectIndex].classList.add('selected');
+		projectPreview.classList.add('selected');
+	
+		if (transitionsNotSupported) {
+			projectPreviews.forEach(preview => preview.classList.add('slide-out'));
+			projectPreviews.forEach(preview => preview.classList.remove('selected'));
+			projects.querySelectorAll('li')[projectIndex].classList.add('content-visible');
 			animating = false;
-		} else { 
+		} else {
 			slideToggleProjects(projectPreviews, projectIndex, 0, true);
 		}
 	}
 
+	// 프로젝트 닫기 함수
 	function closeProject() {
-		projects.find('.selected').removeClass('selected').on('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function(){
-			$(this).removeClass('content-visible').off('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend');
-			slideToggleProjects(projectsPreviewWrapper.children('li'), -1, 0, false);
+		let selectedProject = projects.querySelector('.selected');
+		selectedProject.classList.remove('selected');
+		selectedProject.addEventListener('transitionend', function(event) {
+			event.target.classList.remove('content-visible');
+			event.target.removeEventListener(event.type, arguments.callee);
+			slideToggleProjects(projectsPreviewWrapper.querySelectorAll('li'), -1, 0, false);
 		});
-
-		//if browser doesn't support CSS transitions...
-		if( transitionsNotSupported ) {
-			projectPreviews.removeClass('slide-out');
-			projects.find('.content-visible').removeClass('content-visible');
+	
+		if (transitionsNotSupported) {
+			projectPreviews.forEach(preview => preview.classList.remove('slide-out'));
+			projects.querySelector('.content-visible').classList.remove('content-visible');
 			animating = false;
 		}
 	}
 
+	// 슬라이드 토글 프로젝트 함수
 	function slideToggleProjects(projectsPreviewWrapper, projectIndex, index, bool) {
-		if(index == 0 ) createArrayRandom();
-		if( projectIndex != -1 && index == 0 ) index = 1;
-
+		if (index == 0) createArrayRandom();
+		if (projectIndex != -1 && index == 0) index = 1;
+	
 		let randomProjectIndex = makeUniqueRandom();
-		if( randomProjectIndex == projectIndex ) randomProjectIndex = makeUniqueRandom();
-		
-		if( index < numRandoms - 1 ) {
-			projectsPreviewWrapper.eq(randomProjectIndex).toggleClass('slide-out', bool);
-			setTimeout( function(){
-				//animate next preview project
+		if (randomProjectIndex == projectIndex) randomProjectIndex = makeUniqueRandom();
+	
+		if (index < numRandoms - 1) {
+			projectsPreviewWrapper[randomProjectIndex].classList.toggle('slide-out', bool);
+			setTimeout(function() {
 				slideToggleProjects(projectsPreviewWrapper, projectIndex, index + 1, bool);
 			}, 150);
-		} else if ( index == numRandoms - 1 ) {
-			//this is the last project preview to be animated 
-			projectsPreviewWrapper.eq(randomProjectIndex).toggleClass('slide-out', bool).one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function(){
-				if( projectIndex != -1) {
-					projects.children('li.selected').addClass('content-visible');
-					projectsPreviewWrapper.eq(projectIndex).addClass('slide-out').removeClass('selected');
-				} else if( navigation.hasClass('nav-visible') && bool ) {
-					navigation.addClass('nav-clickable');
+		} else if (index == numRandoms - 1) {
+			projectsPreviewWrapper[randomProjectIndex].classList.toggle('slide-out', bool);
+			projectsPreviewWrapper[randomProjectIndex].addEventListener('transitionend', function(event) {
+				if (projectIndex != -1) {
+					projects.querySelector('li.selected').classList.add('content-visible');
+					projectsPreviewWrapper[projectIndex].classList.add('slide-out');
+					projectsPreviewWrapper[projectIndex].classList.remove('selected');
+				} else if (navigation.classList.contains('nav-visible') && bool) {
+					navigation.classList.add('nav-clickable');
 				}
-				projectsPreviewWrapper.eq(randomProjectIndex).off('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend');
+				event.target.removeEventListener(event.type, arguments.callee);
 				animating = false;
 			});
 		}
 	}
 
-	//http://stackoverflow.com/questions/19351759/javascript-random-number-out-of-5-no-repeat-until-all-have-been-used
+	// 유니크 랜덤 생성 함수
 	function makeUniqueRandom() {
 	    let index = Math.floor(Math.random() * uniqueRandoms.length);
-	    let val = uniqueRandoms[index];
-	    // now remove that value from the array
+	    let val = uniqueRandoms[index];	    
 	    uniqueRandoms.splice(index, 1);
 	    return val;
 	}
 
+	// 랜덤 배열 생성 함수
 	function createArrayRandom() {
-		//reset array
 		uniqueRandoms.length = 0;
 		for (let i = 0; i < numRandoms; i++) {
             uniqueRandoms.push(i);
         }
 	}
+
+	// 프로젝트 미리보기 forEach 반복문
+	projectPreviews.forEach(preview => {
+		// 미리보기 링크 선택
+		const previewLink = preview.querySelector('a');
+		// 배경 이미지 가져오기
+		const bgImgs = getComputedStyle(previewLink).backgroundImage.split(', ');
+		let loadedCount = 0;
+		// 배경 이미지 forEach 반복문
+		bgImgs.forEach(img => {
+			// 이미지 URL 추출
+			img = img.replace(/^url\(["']?/, '').replace(/["']?\)$/, '');
+			// 이미지 객체 생성
+			let image = new Image();
+			image.src = img;
+			// 이미지 로드 이벤트 리스너
+			image.addEventListener('load', function() {
+				loadedCount++;
+				if (loadedCount >= bgImgs.length) {
+					afterLoaded(previewLink);
+				}
+			});
+		});
+	});
 });
 
- (function($){
- 	$.fn.bgLoaded = function(custom) {
-	 	let self = this;
-
-		// Default plugin settings
-		let defaults = {
-			afterLoaded : function(){
-				this.addClass('bg-loaded');
-			}
-		};
-
-		// Merge default and user settings
-		let settings = $.extend({}, defaults, custom);
-
-		// Loop through element
-		self.each(function(){
-			let $this = $(this),
-				bgImgs = $this.css('background-image').split(', ');
-			$this.data('loaded-count',0);
-			$.each( bgImgs, function(key, value){
-				let img = value.replace(/^url\(["']?/, '').replace(/["']?\)$/, '');
-				$('<img/>').attr('src', img).load(function() {
-					$(this).remove(); // prevent memory leaks
-					$this.data('loaded-count',$this.data('loaded-count')+1);
-					if ($this.data('loaded-count') >= bgImgs.length) {
-						settings.afterLoaded.call($this);
-					}
-				});
-			});
-
-		});
-	};
-})(jQuery);
