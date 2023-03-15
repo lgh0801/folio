@@ -157,22 +157,15 @@ document.addEventListener("DOMContentLoaded", function(){
 		// 미리보기 링크 선택
 		const previewLink = preview.querySelector('a');
 		// 배경 이미지 가져오기
-		const bgImgs = getComputedStyle(previewLink).backgroundImage.split(', ');
-		let loadedCount = 0;
-		// 배경 이미지 forEach 반복문
-		bgImgs.forEach(img => {
-			// 이미지 URL 추출
-			img = img.replace(/^url\(["']?/, '').replace(/["']?\)$/, '');
-			// 이미지 객체 생성
-			let image = new Image();
-			image.src = img;
-			// 이미지 로드 이벤트 리스너
-			image.addEventListener('load', function() {
-				loadedCount++;
-				if (loadedCount >= bgImgs.length) {
-					afterLoaded(previewLink);
-				}
-			});
+		const bgImgs = getComputedStyle(previewLink).backgroundImage.split(', ');		
+		// 이미지 URL 추출
+		img = bgImgs[0].replace(/^url\(["']?/, '').replace(/["']?\)$/, '');
+		// 이미지 객체 생성
+		let image = new Image();
+		image.src = img;
+		// 이미지 로드 이벤트 리스너
+		image.addEventListener('load', function() {			
+				afterLoaded(previewLink);
 		});
 	});
 });
