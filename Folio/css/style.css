@@ -15,7 +15,11 @@ body {
   font-size: 1.6rem;
   font-family: "PT Sans", sans-serif;
   color: #ffffff;
-  background-color: #262423;
+  background-color: #262423;  
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 a {
@@ -569,7 +573,7 @@ li.selected .cd-project-title,
   display: none;
   padding: 4em 0;
   background-color: #ffffff;
-  color: #7d7c7b;
+  color: #333333;
   font-size: large;
 }
 .content-visible .cd-project-info {
