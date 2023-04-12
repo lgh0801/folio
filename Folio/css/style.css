@@ -803,3 +803,7 @@ JavaScript Disabled
   height: "550px";
   object-fit: cover;
 }
+
+h3 {
+  font-weight: bold;
+}
