@@ -3,7 +3,9 @@
 Primary style
 
 -------------------------------- */
-*, *::after, *::before {
+*,
+*::after,
+*::before {
   box-sizing: border-box;
 }
 
@@ -15,7 +17,7 @@ body {
   font-size: 1.6rem;
   font-family: "PT Sans", sans-serif;
   color: #ffffff;
-  background-color: #262423;  
+  background-color: #262423;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -95,9 +97,10 @@ Menu trigger
   -moz-transition: -moz-transform 0.3s, background-color 0.3s;
   transition: transform 0.3s, background-color 0.3s;
 }
-.cd-nav-trigger .cd-icon::before, .cd-nav-trigger .cd-icon::after {
+.cd-nav-trigger .cd-icon::before,
+.cd-nav-trigger .cd-icon::after {
   /* upper and lower lines of the menu icon */
-  content: '';
+  content: "";
   top: 0;
   right: 0;
   width: 100%;
@@ -124,7 +127,8 @@ Menu trigger
   /* user selects a projects - transform the icon into a 'X' */
   background-color: rgba(255, 255, 255, 0);
 }
-.cd-nav-trigger.project-open .cd-icon::before, .cd-nav-trigger.project-open .cd-icon::after {
+.cd-nav-trigger.project-open .cd-icon::before,
+.cd-nav-trigger.project-open .cd-icon::after {
   background-color: white;
 }
 .cd-nav-trigger.project-open .cd-icon::before {
@@ -172,14 +176,16 @@ Menu trigger
     transform: translateY(-50%) translateX(-50%) rotate(-90deg);
   }
   .cd-nav-trigger.nav-visible .cd-icon::after {
-    -webkit-transform: translateX(-5px) translateY(3px) rotate(45deg) scaleX(0.5);
+    -webkit-transform: translateX(-5px) translateY(3px) rotate(45deg)
+      scaleX(0.5);
     -moz-transform: translateX(-5px) translateY(3px) rotate(45deg) scaleX(0.5);
     -ms-transform: translateX(-5px) translateY(3px) rotate(45deg) scaleX(0.5);
     -o-transform: translateX(-5px) translateY(3px) rotate(45deg) scaleX(0.5);
     transform: translateX(-5px) translateY(3px) rotate(45deg) scaleX(0.5);
   }
   .cd-nav-trigger.nav-visible .cd-icon::before {
-    -webkit-transform: translateX(-5px) translateY(-3px) rotate(-45deg) scaleX(0.5);
+    -webkit-transform: translateX(-5px) translateY(-3px) rotate(-45deg)
+      scaleX(0.5);
     -moz-transform: translateX(-5px) translateY(-3px) rotate(-45deg) scaleX(0.5);
     -ms-transform: translateX(-5px) translateY(-3px) rotate(-45deg) scaleX(0.5);
     -o-transform: translateX(-5px) translateY(-3px) rotate(-45deg) scaleX(0.5);
@@ -287,14 +293,20 @@ Projects
   -o-transform: translateY(-75%);
   transform: translateY(-75%);
 }
+.cd-projects-previews li:nth-of-type(5) a {
+  -webkit-transform: translateY(-75%);
+  -moz-transform: translateY(-75%);
+  -ms-transform: translateY(-75%);
+  -o-transform: translateY(-75%);
+  transform: translateY(-75%);
+}
 .cd-projects-previews .bg-loaded a {
   opacity: 1;
 }
 @media only screen and (min-width: 1024px) {
   .cd-projects-previews li {
-    display: inline-block;
     height: 100%;
-    width: 25%;
+    width: 20%;
     float: left;
   }
   .cd-projects-previews li.selected {
@@ -330,6 +342,13 @@ Projects
     transform: translateX(-50%);
   }
   .cd-projects-previews li:nth-of-type(4) a {
+    -webkit-transform: translateX(-75%);
+    -moz-transform: translateX(-75%);
+    -ms-transform: translateX(-75%);
+    -o-transform: translateX(-75%);
+    transform: translateX(-75%);
+  }
+  .cd-projects-previews li:nth-of-type(5) a {
     -webkit-transform: translateX(-75%);
     -moz-transform: translateX(-75%);
     -ms-transform: translateX(-75%);
@@ -384,13 +403,19 @@ Projects
 
 .cd-projects-previews li:nth-of-type(3) a,
 .cd-projects > li:nth-of-type(3) .preview-image {
-  background: url(../img/img-3.jpg) no-repeat center center;
+  background: url(../img/img-5.jpg) no-repeat center center;
   background-size: cover;
 }
 
 .cd-projects-previews li:nth-of-type(4) a,
 .cd-projects > li:nth-of-type(4) .preview-image {
   background: url(../img/img-4.jpg) no-repeat center center;
+  background-size: cover;
+}
+
+.cd-projects-previews li:nth-of-type(5) a,
+.cd-projects > li:nth-of-type(5) .preview-image {
+  background: url(../img/img-3.jpg) no-repeat center center;
   background-size: cover;
 }
 
@@ -414,7 +439,7 @@ Projects
 }
 .cd-project-title::after {
   /* line below project title */
-  content: '';
+  content: "";
   position: absolute;
   left: 50%;
   bottom: -10px;
@@ -457,8 +482,8 @@ Projects
   font-family: "Merriweather", serif;
   font-style: italic;
   line-height: 1.2;
-  padding: .4em 2em;
-  opacity: .8;
+  padding: 0.4em 2em;
+  opacity: 0.8;
 }
 @media only screen and (min-width: 1024px) {
   .cd-project-title {
@@ -529,10 +554,30 @@ Projects
   }
 }
 
+.cd-projects-previews li:nth-of-type(5) a .cd-project-title,
+.cd-projects > li:nth-of-type(5) .cd-project-title {
+  -webkit-transform: translateY(37.5vh);
+  -moz-transform: translateY(37.5vh);
+  -ms-transform: translateY(37.5vh);
+  -o-transform: translateY(37.5vh);
+  transform: translateY(37.5vh);
+}
+@media only screen and (min-width: 1024px) {
+  .cd-projects-previews li:nth-of-type(5) a .cd-project-title,
+  .cd-projects > li:nth-of-type(5) .cd-project-title {
+    -webkit-transform: translateX(300%);
+    -moz-transform: translateX(300%);
+    -ms-transform: translateX(300%);
+    -o-transform: translateX(300%);
+    transform: translateX(300%);
+  }
+}
+
 li.selected .cd-project-title,
 .cd-projects > li:nth-of-type(2).selected .cd-project-title,
 .cd-projects > li:nth-of-type(3).selected .cd-project-title,
-.cd-projects > li:nth-of-type(4).selected .cd-project-title {
+.cd-projects > li:nth-of-type(4).selected .cd-project-title,
+.cd-projects > li:nth-of-type(5).selected .cd-project-title {
   -webkit-transform: translateY(0);
   -moz-transform: translateY(0);
   -ms-transform: translateY(0);
@@ -543,7 +588,8 @@ li.selected .cd-project-title,
   li.selected .cd-project-title,
   .cd-projects > li:nth-of-type(2).selected .cd-project-title,
   .cd-projects > li:nth-of-type(3).selected .cd-project-title,
-  .cd-projects > li:nth-of-type(4).selected .cd-project-title {
+  .cd-projects > li:nth-of-type(4).selected .cd-project-title,
+  .cd-projects > li:nth-of-type(5).selected .cd-project-title {
     -webkit-transform: translateX(150%);
     -moz-transform: translateX(150%);
     -ms-transform: translateX(150%);
@@ -711,7 +757,7 @@ li.selected .cd-project-title,
 }
 .cd-primary-nav a {
   display: inline-block;
-  padding: .4em 1em;
+  padding: 0.4em 1em;
   border-radius: 4px;
   -webkit-transition: background 0.2s;
   -moz-transition: background 0.2s;
@@ -732,12 +778,12 @@ li.selected .cd-project-title,
   color: #a8ae7e;
   text-transform: uppercase;
   font-weight: 700;
-  font-size: 2.0rem;
+  font-size: 2rem;
   letter-spacing: 1px;
 }
 .cd-primary-nav .cd-label::after {
   /* line below .cd-label*/
-  content: '';
+  content: "";
   position: absolute;
   left: 50%;
   right: auto;
